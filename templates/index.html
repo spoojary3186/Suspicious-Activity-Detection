@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Suspicious Activity Recognition</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-image: url("{{ url_for('static', filename='images/index.jpg') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+      color: white;
+    }
+
+    .glass-box {
+      width: 45%;
+      margin: auto;
+      padding: 35px 45px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 15px;
+      margin-top: 50px !important;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      animation: fadeIn 0.7s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #form1, #form2 { display: none; }
+    #form1.active, #form2.active { display: block; }
+
+    .custom-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #00b09b, #96c93d);
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .custom-btn:hover {
+      transform: scale(1.03);
+      background: linear-gradient(135deg, #00997f, #7dbd2f);
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .link-btn {
+      color: #00ffea;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .link-btn:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse" style="border-radius:0;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" data-value="#form1" onclick="toggleform(event)">
+        Suspicious Activity Recognition
+      </a>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a data-value="#form1" onclick="toggleform(event)">
+          <span class="glyphicon glyphicon-user"></span> Login
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- LOGIN FORM -->
+  <form method="post" action="{{ url_for('userlog') }}" id="form1" class="glass-box active">
+
+    <center><h2 style="margin-bottom:20px;">User Login</h2></center>
+
+    {% if msg %}
+      <div class="alert alert-danger">{{ msg }}</div>
+    {% endif %}
+
+    <label>Username:</label>
+    <input type="text" class="form-control" name="name" placeholder="Enter username">
+
+    <label>Password:</label>
+    <input type="password" class="form-control" name="password" placeholder="Enter password">
+
+    <br>
+    <button type="submit" class="custom-btn">Login</button>
+    <br><br>
+
+    <center>
+      <p>Don't have an account? 
+        <span class="link-btn" data-value="#form2" onclick="toggleform(event)">Sign up</span>
+      </p>
+    </center>
+
+  </form>
+
+  <!-- REGISTER FORM -->
+  <form method="post" action="{{ url_for('userreg') }}" id="form2" class="glass-box">
+
+    <center><h2 style="margin-bottom:20px;">User Registration</h2></center>
+
+    <label>Username:</label>
+    <input type="text" class="form-control" name="name" required>
+
+    <label>Email:</label>
+    <input type="email" class="form-control" name="email" required>
+
+    <label>Mobile No.:</label>
+    <input type="tel" class="form-control" name="phone" required pattern="\d{10}" maxlength="10">
+
+    <label>Password:</label>
+    <input type="password" class="form-control" name="password" required>
+
+    <br>
+    <button type="submit" class="custom-btn">Register</button>
+    <br><br>
+
+    <center>
+      <p>Already registered? 
+        <span class="link-btn" data-value="#form1" onclick="toggleform(event)">Sign in</span>
+      </p>
+    </center>
+
+  </form>
+
+</div>
+
+<script>
+function toggleform(event) {
+    var targetId = event.target.getAttribute('data-value');
+    ['#form1', '#form2'].forEach(function(form) {
+        if (form === targetId) {
+            $(form).addClass("active");
+        } else {
+            $(form).removeClass("active");
+        }
+    });
+}
+</script>
+
+</body>
+</html>

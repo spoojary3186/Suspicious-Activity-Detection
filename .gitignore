@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Database
+*.db
+
+# Temp files
+temp.txt
+
+# Videos
+*.mp4
+*.avi
+
+# Large ML models (download separately)
+*.pt
+*.h5
+*.caffemodel
+*.pb
+
+# Virtual env
+venv/
+env/
+
+# OS files
+.DS_Store

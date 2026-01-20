@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Suspicious Activity Reconnaissance</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-image: url("{{ url_for('static', filename='images/userlog.jpg') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Centering container */
+    #content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;   /* Stack vertically */
+      gap: 30px;                /* Spacing between boxes */
+      margin-top: 40px;
+    }
+
+    .glass-box {
+      width: 55%;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transition: 0.3s ease-in-out;
+    }
+
+    .glass-box:hover {
+      transform: translateY(-5px);
+      background: rgba(0, 0, 0, 0.45);
+    }
+
+    h2 {
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .btn-modern {
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse" style="border-radius:0;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/" style="font-weight:600; font-size:18px;">
+        Suspicious Activity Detection
+      </a>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/" style="font-size:15px;">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container" id="content">
+
+    <!-- 🔵 MESSAGE BLOCK -->
+    {% if msg %}
+    <div class="alert alert-info" style="font-size:15px; font-weight:500; width:80%; text-align:center;">
+      {{ msg }}
+    </div>
+    {% endif %}
+
+    <!-- YOLO VIDEO ANALYSIS -->
+    <div class="glass-box">
+      <h2>Analyse with YOLO</h2>
+      <hr style="border-color:#ccc;">
+
+      <form method="post" action="{{ url_for('video_route') }}" enctype="multipart/form-data">
+        <label style="font-size:15px;">Select video file:</label>
+        <input type="file" class="form-control" name="file">
+
+        <br>
+        <center>
+          <button type="submit" class="btn btn-success btn-modern">Analyse Video</button>
+        </center>
+      </form>
+    </div>
+    
+
+    <!-- LIVE STREAMING -->
+    <div class="glass-box">
+      <h2>Live Streaming</h2>
+      <hr style="border-color:#ccc;">
+
+      <center>
+        <a href="/Live" class="btn btn-warning btn-modern">Start Streaming</a>
+      </center>
+    </div>
+
+</div>
+
+</body>
+</html>
